@@ -1,14 +1,11 @@
 Rails.application.routes.draw do
+
   get 'static_pages/home'
-
   get 'static_pages/help'
-
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
+  get 'static_pages/about'
   resources :users
   resources :microposts
-  root 'users#index'
+  root 'static_pages#home'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
