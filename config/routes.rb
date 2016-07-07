@@ -4,11 +4,9 @@ Rails.application.routes.draw do
   get '/help', to: 'static_pages#help'
   get '/about', to: 'static_pages#about'
   get '/contact', to: 'static_pages#contact'
-  resources :users do
-    collection do
-      get '/signup' => 'users#new'
-    end
-  end
+  get '/signup' => 'users#new'
+  post '/signup',  to: 'users#create'
+  resources :users
   resources :microposts
 
   # Example of regular route:
