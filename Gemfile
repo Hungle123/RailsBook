@@ -9,6 +9,7 @@ gem 'jquery-rails', '4.1.1'
 gem 'turbolinks',   '5.0.0'
 gem 'bootstrap-sass', '3.3.6'
 gem 'jbuilder',     '2.4.1'
+gem 'bcrypt',         '3.1.11'
 
 group :development do
   gem 'web-console',           '3.1.1'
