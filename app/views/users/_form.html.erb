@@ -1,4 +1,4 @@
-<%= form_for(@user) do |f| %>
+<%= form_for(@user, html: { multipart: true }) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
 
   <%= f.label :name %>
@@ -13,5 +13,16 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
 
+  <div class="choose_file">
+    <div class="inner">
+      <%= image_tag("close.png", height: '40', width: '40', class: 'close_image')%>
+      <%= image_tag((@user.avatar? ? @user.avatar_url : "default-placeholder.png"), height: '200', width: '200', class: 'output_image')%>
+      <%= f.file_field :avatar, accept: 'image/jpeg,image/gif,image/png', class: 'input_choose' %>
+    </div>
+  </div>
+  <span class="input_choose_file">
+    <%= f.hidden_field :avatar_cache %>
+  </span>
+  <br>
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

@@ -224,6 +224,15 @@ input {
       display: block;
       padding: 5px 0;
     }
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      li {
+        border: none;
+        display:inline-block;
+      }
+    }
   }
   .timestamp {
     color: $gray-light;
@@ -248,5 +257,51 @@ span.picture {
   margin-top: 10px;
   input {
     border: 0;
+  }
+}
+
+.choose_file {
+  .inner {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    background: image-url('default-placeholder.png') no-repeat center;
+    background-size: cover;
+    .input_choose {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      opacity: 0;
+      margin: 0;
+    }
+    .close_image {
+      position: absolute;
+      z-index: 9999;
+      background: #ccc;
+      border-radius: 100%;
+      margin: 0 177px;
+    }
+    &::after {
+      transition: all 0.4s;
+      position: absolute;
+      background: image-url('icon-cloud-upload.png') no-repeat center;
+      background-size: 80px;
+      content: "";
+      top: 0;
+      left:0;
+      right:0;
+      bottom:0;
+      opacity: 0;
+      pointer-events: none;
+      cursor: pointer;
+    }
+    &:hover {
+      &::after {
+        opacity: 1;
+      }
+    }
   }
 }

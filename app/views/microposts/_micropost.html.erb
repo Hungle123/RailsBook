@@ -2,7 +2,19 @@
   <li id="<%= micropost.id %>">
     <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
     <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
-    <span class="content"><%= micropost.content %></span>
+    <span class="content">
+      <%= micropost.content %>
+      <% if micropost.pictures? %>
+        <ul>
+          <% micropost.pictures.each do |picture|%>
+            <li><%= image_tag picture.url.to_s%></li>
+          <% end %>
+        </ul>
+      <% end %>
+      <% if micropost.picture? %>
+          <%= image_tag micropost.picture.url.to_s%>
+      <% end %>
+    </span>
     <span class="timestamp">
       Posted <%= time_ago_in_words(micropost.created_at) %> ago.
       <% if current_user?(micropost.user) %>

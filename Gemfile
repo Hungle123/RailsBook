@@ -16,6 +16,11 @@ gem 'bootstrap-will_paginate', '0.0.10'
 gem 'sidekiq'
 gem 'redis-rails', '~> 4.0'
 gem 'figaro'
+gem 'carrierwave', github: 'carrierwaveuploader/carrierwave'
+gem 'mini_magick',             '4.5.1'
+gem 'fog',                     '1.38.0'
+gem 'pg', '0.18.4'
+gem 'jquery-fileupload-rails'
 
 group :development do
   gem 'web-console',           '3.1.1'

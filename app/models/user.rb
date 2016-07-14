@@ -13,6 +13,7 @@
 #  activation_digest :string
 #  activated         :boolean          default(FALSE)
 #  activated_at      :datetime
+#  avatar            :string
 #
 # Indexes
 #
@@ -23,6 +24,7 @@ class User < ActiveRecord::Base
   has_many :microposts, dependent: :destroy
 
   attr_accessor :remember_token, :activation_token
+  mount_uploader :avatar, PictureUploader
   before_save   :downcase_email
   before_create :create_activation_digest
 
@@ -34,6 +36,7 @@ class User < ActiveRecord::Base
                     uniqueness: { case_sensitive: false }
   has_secure_password
   validates :password, presence: true, length: { minimum: 8 }, allow_nil: true
+  validate :avatar_size
 
   # Returns the hash digest of the given string.
   def self.digest(string)
@@ -91,5 +94,11 @@ class User < ActiveRecord::Base
   # Sends activation email.
   def send_activation_email
     UserMailer.account_activation(self).deliver_now
+  end
+
+  def avatar_size
+    if avatar.size > 5.megabytes
+      errors.add(:avatar, 'should be less than 5MB')
+    end
   end
 end

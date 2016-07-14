@@ -1,7 +1,20 @@
-<%= form_for(@micropost) do |f| %>
+<%= form_for(@micropost, html: { multipart: true }) do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
+  <div class="choose_file">
+    <div class="inner">
+      <%= image_tag((@micropost.picture? ? @micropost.picture_url : "default-placeholder.png"), height: '200', width: '200', class: 'output_image')%>
+      <%= f.file_field :picture, accept: 'image/jpeg,image/gif,image/png', class: 'input_choose' %>
+    </div>
+  </div>
+  <span class="input_choose_file">
+    <%= f.hidden_field :picture_cache %>
+  </span>
+  <span class="picture">
+    <%= f.file_field :pictures, multiple: true, accept: 'image/jpeg,image/gif,image/png' %>
+  </span>
   <div class="field">
     <%= f.text_area :content, placeholder: "Compose new micropost..." %>
   </div>
   <%= f.submit "Post", class: "btn btn-primary" %>
 <% end %>
+
